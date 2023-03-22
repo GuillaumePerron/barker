@@ -15,3 +15,4 @@
   -	*Back-End :* Python
 - **Hébergement du site :** Vercel
 - **Code couleur :** Jaune et noire
+- **Gestion des tâches :** [Notion](https://www.notion.so/barker-app/442e4bcd0ca04b71a3a1025f0861f070?v=75ab636be9d444e7bc8e98b9fe2ff275)
