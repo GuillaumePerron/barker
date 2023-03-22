@@ -6,10 +6,10 @@
 - **Livraison :** 3 mois
 - **Budget :** 3 millions de francs
 - **Rôles :**
-  -	*1 Chef de projet :* Adrien
-  -	*2 Développeurs Front-End :* Irwan, Kevin
-  -	*2 Développeurs Back-End :* Guillaume, Florian
-  -	*1 Web Designer :* David
+  -	*1 Chef de projet :* Adrien Féré
+  -	*2 Développeurs Front-End :* Irwan Soer, Kevin Petit
+  -	*2 Développeurs Back-End :* Guillaume Perron, Florian Audouard
+  -	*1 Web Designer :* David Domergue
 - **Langage :**
   -	*Front-End :* Javascript
   -	*Back-End :* Python
