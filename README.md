@@ -13,5 +13,5 @@
 - **Langage :**
   -	*Front-End :* Javascript
   -	*Back-End :* Python
-- *Hébergement du site :* Vercel
-- *Code couleur :* Jaune et noire
+- **Hébergement du site :** Vercel
+- **Code couleur :** Jaune et noire
