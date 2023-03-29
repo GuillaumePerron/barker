@@ -1,5 +1,5 @@
 # Barker
-[![](media/barker-logo.png)](https://barker-guillaumeperron.vercel.app/)
+[![](images/barker-logo.png)](https://barker-guillaumeperron.vercel.app/)
 - **Nom de l’entreprise :** Banana Software
 - **Nom de l’application :** Barker
 - **Logo :** Chien jaune  
