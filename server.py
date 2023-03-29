@@ -1,6 +1,6 @@
 import os
 from flask import Flask, jsonify, render_template, request
-from database import add_message, get_data
+from database import add_message, get_data, reset_table
 
 
 os.chdir(os.path.dirname(__file__))
@@ -29,7 +29,12 @@ def send_msg():  # pylint: disable=missing-function-docstring
 @app.route("/msgFromHtml", methods=["POST"])
 def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
-    add_message(result.decode("utf-8"))
+    msg = result.decode("utf-8")
+    print(msg, msg == "/reset")
+    if msg == "/reset":
+        reset_table()
+        return "reset"
+    add_message(msg)
     return "ok"
 
 
