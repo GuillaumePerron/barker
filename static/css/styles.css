@@ -1,4 +1,6 @@
-#testDatabase{
-    font-size: 30px;
-    color:darkgray
+#msg{
+    min-height: 500px;
+    min-width: 50px;
+    border : solid black 1px;
+
 }
