@@ -48,3 +48,7 @@ def add_message(msg):  # pylint: disable=missing-function-docstring
                     "msg": str(msg),
                 },
             )
+
+
+if __name__ == "__main__":
+    reset_table()

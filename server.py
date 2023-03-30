@@ -34,6 +34,9 @@ def receive_msg():  # pylint: disable=missing-function-docstring
     if msg == "/reset":
         reset_table()
         return "reset"
+    if msg == "/test":
+        add_message("ptdrrr")
+        return "ptdrr"
     add_message(msg)
     return "ok"
 
