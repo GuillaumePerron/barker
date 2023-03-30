@@ -10,7 +10,9 @@ function addMsg(text) {
 }
 
 input.addEventListener("keydown", (event) => {
-	document.querySelector("#test").innerText = event.code;
+	document.querySelector(
+		"#test"
+	).innerText = `KeyCode : ${event.keyCode} , key: ${event.key}, code: ${event.code}`;
 	if (!event.code.toLowerCase().includes("enter")) {
 		return;
 	}
