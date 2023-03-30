@@ -29,10 +29,10 @@ def send_msg():  # pylint: disable=missing-function-docstring
 def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
     msg = result.decode("utf-8")
-    if "/reset" == msg:
+    if "/reset" in msg:
         reset_table()
         return "reset"
-    if "/test" == msg:
+    if "/test" in msg:
         add_message("bonsoir")
         return "ptdrr"
     add_message(msg)
