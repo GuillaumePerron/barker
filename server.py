@@ -30,7 +30,6 @@ def send_msg():  # pylint: disable=missing-function-docstring
 def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
     msg = result.decode("utf-8")
-    print(msg, msg == "/reset")
     if msg == "/reset":
         reset_table()
         return "reset"

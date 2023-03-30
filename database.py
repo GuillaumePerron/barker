@@ -4,6 +4,8 @@ Returns:
     _type_: _description_
 """
 import os
+from threading import Thread
+import time
 import urllib.parse
 import psycopg
 
@@ -32,10 +34,11 @@ def reset_table():  # pylint: disable=missing-function-docstring
 def get_data():  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
-            cur.execute("select * from data;")
+            cur.execute("select un_text from data where active=true;")
             res = []
             for x in cur.fetchall():
-                res.append(x[1])
+                print(x)
+                res.append(x[0])
             return res
 
 
@@ -50,5 +53,17 @@ def add_message(msg):  # pylint: disable=missing-function-docstring
             )
 
 
+def auto_delete():
+    while 1:
+        with psycopg.connect(  # pylint: disable=not-context-manager
+            CONN_PARAMS
+        ) as conn:
+            with conn.cursor() as cur:
+                cur.execute("select insert_auto();")
+                time.sleep(5)
+
+
 if __name__ == "__main__":
     reset_table()
+else:
+    Thread(target=auto_delete).start()
