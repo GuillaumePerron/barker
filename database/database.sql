@@ -7,12 +7,10 @@ CREATE TABLE data(
     date_creation TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     active boolean DEFAULT true
 );
-
-CREATE OR REPLACE FUNCTION insert_auto() RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION update_ancien_msg() RETURNS VOID AS $$
 BEGIN
   UPDATE data
-  SET active=false
-  FROM data as d2
-  WHERE d2.date_creation + interval '1 minute' <= CURRENT_TIMESTAMP;
+  SET active = false
+  WHERE date_creation + (interval '1 minute') <= CURRENT_TIMESTAMP;
 END;
 $$ LANGUAGE plpgsql;

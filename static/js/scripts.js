@@ -13,9 +13,13 @@ input.addEventListener("keydown", (event) => {
 	if (!event.code.toLowerCase().includes("enter")) {
 		return;
 	}
+	let pseudoMsg = pseudo.value;
+	if (pseudoMsg === "") {
+		pseudoMsg = "Anonyme";
+	}
 	fetch("/msgFromHtml", {
 		method: "POST",
-		body: `${pseudo.value}: ${input.value}`,
+		body: `${pseudoMsg}: ${input.value}`,
 	});
 	input.value = "";
 });
@@ -25,9 +29,9 @@ async function fetchgetMessage() {
 		body: 0,
 	});
 	const data = await resp.json();
+	listMsg = [];
+	msg.innerHTML = "";
 	if (data !== "no") {
-		listMsg = [];
-		msg.innerHTML = "";
 		for (let elem of data) {
 			listMsg.push(elem);
 			addMsg(elem);

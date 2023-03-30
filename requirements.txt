@@ -2,3 +2,4 @@ flask==2.2.2
 psycopg
 psycopg-binary
 python-dotenv
+Flask-APScheduler

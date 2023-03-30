@@ -38,9 +38,7 @@ def get_data():  # pylint: disable=missing-function-docstring
             cur.execute("select un_text from data where active=true;")
             res = []
             for x in cur.fetchall():
-                print(x)
                 res.append(x[0])
-            cur.execute("select insert_auto();")
             return res
 
 
@@ -55,14 +53,10 @@ def add_message(msg):  # pylint: disable=missing-function-docstring
             )
 
 
-# def auto_delete():
-#     while 1:
-#         with psycopg.connect(  # pylint: disable=not-context-manager
-#             CONN_PARAMS
-#         ) as conn:
-#             with conn.cursor() as cur:
-
-#                 time.sleep(5)
+def auto_delete():
+    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
+        with conn.cursor() as cur:
+            cur.execute("select update_ancien_msg();")
 
 
 if __name__ == "__main__":
