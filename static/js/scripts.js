@@ -10,10 +10,7 @@ function addMsg(text) {
 }
 
 input.addEventListener("keydown", (event) => {
-	document.querySelector(
-		"#test"
-	).innerText = `KeyCode : ${event.keyCode} , key: ${event.key}, code: ${event.code}`;
-	if (!event.code.toLowerCase().includes("enter")) {
+	if (event.keyCode !== 13) {
 		return;
 	}
 	let pseudoMsg = pseudo.value;
