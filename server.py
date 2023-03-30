@@ -1,17 +1,12 @@
 import os
 from flask import Flask, jsonify, render_template, request
 from database import add_message, get_data, reset_table, auto_delete
-from apscheduler.schedulers.background import BackgroundScheduler
 
 
 os.chdir(os.path.dirname(__file__))
 
 
 app = Flask(__name__)
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=auto_delete, trigger="interval", seconds=5)
-scheduler.start()
 
 
 @app.route("/")
@@ -23,6 +18,7 @@ def index():  # pylint: disable=missing-function-docstring
 def send_msg():  # pylint: disable=missing-function-docstring
     data = request.get_data()
     number = int(data)
+    auto_delete()
     msg = get_data()
     print(msg)
     if number == len(msg):
