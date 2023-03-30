@@ -35,6 +35,7 @@ def reset_table():  # pylint: disable=missing-function-docstring
 def get_data():  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
+            cur.execute("select insert_auto();")
             cur.execute("select un_text from data where active=true;")
             res = []
             for x in cur.fetchall():
@@ -46,7 +47,6 @@ def get_data():  # pylint: disable=missing-function-docstring
 def add_message(msg):  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
-            cur.execute("select insert_auto();")
             cur.execute(
                 "INSERT INTO data (un_text) VALUES (%(msg)s);",
                 {
