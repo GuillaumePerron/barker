@@ -35,12 +35,12 @@ def reset_table():  # pylint: disable=missing-function-docstring
 def get_data():  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
-            cur.execute("select insert_auto();")
             cur.execute("select un_text from data where active=true;")
             res = []
             for x in cur.fetchall():
                 print(x)
                 res.append(x[0])
+            cur.execute("select insert_auto();")
             return res
 
 
