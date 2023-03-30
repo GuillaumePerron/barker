@@ -19,21 +19,20 @@ def send_msg():  # pylint: disable=missing-function-docstring
     data = request.get_data()
     number = int(data)
     msg = get_data()
-    print(msg)
     if number == len(msg):
         return jsonify("no")
-    print(msg[number: len(msg)])
-    return jsonify(msg[number: len(msg)])
+    print(msg[number : len(msg)])
+    return jsonify(msg[number : len(msg)])
 
 
 @app.route("/msgFromHtml", methods=["POST"])
 def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
     msg = result.decode("utf-8")
-    if "/reset" in msg:
+    if "/reset" == msg:
         reset_table()
         return "reset"
-    if "/test" in msg:
+    if "/test" == msg:
         add_message("bonsoir")
         return "ptdrr"
     add_message(msg)
