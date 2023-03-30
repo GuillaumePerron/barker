@@ -22,8 +22,8 @@ def send_msg():  # pylint: disable=missing-function-docstring
     print(msg)
     if number == len(msg):
         return jsonify("no")
-    print(msg[number : len(msg)])
-    return jsonify(msg[number : len(msg)])
+    print(msg[number: len(msg)])
+    return jsonify(msg[number: len(msg)])
 
 
 @app.route("/msgFromHtml", methods=["POST"])
@@ -31,10 +31,10 @@ def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
     msg = result.decode("utf-8")
     print(msg, msg == "/reset")
-    if msg == "/reset":
+    if "/reset" in msg:
         reset_table()
         return "reset"
-    if msg == "/test":
+    if "/test" in msg:
         add_message("bonsoir")
         return "ptdrr"
     add_message(msg)

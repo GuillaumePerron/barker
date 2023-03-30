@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Flask with vercel</title>
+        <script defer type="module" src="static/js/scripts.js"></script>
+        <link href="static/css/styles.css" rel="stylesheet" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Flask with vercel</title>
-    <script defer type="module" src="static/js/scripts.js"></script>
-    <link href="static/css/styles.css" rel="stylesheet">
-</head>
-
-<body>
-    <div id="msg"></div>
-    <input type="text">
-
-</body>
-
+    <body>
+        <header>
+            <img src="static/images/barker-logo.png" alt="barker-logo" />
+            <div>
+                <p>Pseudo:</p>
+                <input id="pseudo" type="text" placeholder="Pseudo" />
+            </div>
+        </header>
+        <div id="msg"></div>
+        <input id="sendMsg" type="text" placeholder="Message" />
+        <footer></footer>
+    </body>
 </html>
