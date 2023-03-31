@@ -5,7 +5,7 @@ let listMsg = [];
 
 function addMsg(text) {
 	const div = document.createElement("div");
-	div.innerText = text;
+	div.innerHTML = text;
 	msg.appendChild(div);
 }
 
