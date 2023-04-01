@@ -1,6 +1,7 @@
 const pseudo = document.querySelector("#pseudo");
 const input = document.querySelector("#sendMsg");
 const msg = document.querySelector("#msg");
+const sendButton = document.querySelector("#send");
 let listMsg = [];
 
 function addMsg(text) {
@@ -9,8 +10,8 @@ function addMsg(text) {
 	msg.appendChild(div);
 }
 
-input.addEventListener("keydown", (event) => {
-	if (event.keyCode !== 13) {
+function sendMessage() {
+	if (input.value === "") {
 		return;
 	}
 	let pseudoMsg = pseudo.value;
@@ -22,6 +23,16 @@ input.addEventListener("keydown", (event) => {
 		body: `${pseudoMsg}: ${input.value}`,
 	});
 	input.value = "";
+}
+
+input.addEventListener("keydown", (event) => {
+	if (event.keyCode !== 13) {
+		return;
+	}
+	sendMessage();
+});
+sendButton.addEventListener("click", (_) => {
+	sendMessage();
 });
 async function fetchgetMessage() {
 	const resp = await fetch("/msgFromServer", {
