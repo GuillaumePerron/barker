@@ -40,6 +40,7 @@ def receive_msg():  # pylint: disable=missing-function-docstring
         add_message(
             '<img src="https://media.tenor.com/CHc0B6gKHqUAAAAi/deadserver.gif">'
         )
+        return "rick"
     add_message(msg)
     return "ok"
 
