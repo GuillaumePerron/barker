@@ -36,6 +36,10 @@ def receive_msg():  # pylint: disable=missing-function-docstring
     if "/test" in msg:
         add_message("bonsoir")
         return "ptdrr"
+    if "/rick" in msg:
+        add_message(
+            '<img src="https://media.tenor.com/CHc0B6gKHqUAAAAi/deadserver.gif">'
+        )
     add_message(msg)
     return "ok"
 
