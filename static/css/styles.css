@@ -9,6 +9,9 @@
 #send{
     cursor: pointer;
 }
+.tag{
+    background-color: lightblue;
+}
 
 header {
     display: flex;

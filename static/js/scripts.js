@@ -44,8 +44,17 @@ async function fetchgetMessage() {
 	msg.innerHTML = "";
 	if (data !== "no") {
 		for (let elem of data) {
-			listMsg.push(elem);
-			addMsg(elem);
+			let finalMsg = [];
+			for (let subElem of elem.split(" ")) {
+				if (subElem.includes("@")) {
+					finalMsg.push(`<span class="tag">${subElem}</span>`);
+				} else {
+					finalMsg.push(subElem);
+				}
+			}
+			const final = finalMsg.join(" ");
+			listMsg.push(final);
+			addMsg(final);
 		}
 	}
 	setTimeout(fetchgetMessage, 100);
