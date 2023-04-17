@@ -36,11 +36,11 @@ def get_data():  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
             cur.execute(
-                "select un_text from data where active=true ORDER BY date_creation ASC;"
+                "select id_data,un_text from data where active=true ORDER BY date_creation ASC;"
             )
             res = []
             for x in cur.fetchall():
-                res.append(x[0])
+                res.append(x)
             return res
 
 

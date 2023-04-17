@@ -2,11 +2,12 @@ const pseudo = document.querySelector("#pseudo");
 const input = document.querySelector("#sendMsg");
 const msg = document.querySelector("#msg");
 const sendButton = document.querySelector("#send");
-let listMsg = [];
+let listMsg = {};
 
-function addMsg(text) {
+function addMsg(elem) {
 	const div = document.createElement("div");
-	div.innerHTML = text;
+	div.innerHTML = dataTraitement(elem[1]);
+	div.id = elem[0];
 	msg.appendChild(div);
 }
 
@@ -34,27 +35,55 @@ input.addEventListener("keydown", (event) => {
 sendButton.addEventListener("click", (_) => {
 	sendMessage();
 });
+
+function dingDong() {
+	console.log("ding dong");
+}
+
+function dataTraitement(elem) {
+	let finalMsg = [];
+	for (let subElem of elem.split(" ")) {
+		if (subElem[0] === "@") {
+			if (subElem.substring(1) === pseudo.value) {
+				dingDong();
+			}
+			finalMsg.push(`<span class="tag">${subElem}</span>`);
+		} else {
+			finalMsg.push(subElem);
+		}
+	}
+	return finalMsg.join(" ");
+}
+
+function supprMsg(key) {
+	document.getElementById(key).remove();
+}
+
 async function fetchgetMessage() {
 	const resp = await fetch("/msgFromServer", {
 		method: "POST",
 		body: 0,
 	});
 	const data = await resp.json();
-	listMsg = [];
-	msg.innerHTML = "";
-	if (data !== "no") {
-		for (let elem of data) {
-			let finalMsg = [];
-			for (let subElem of elem.split(" ")) {
-				if (subElem.includes("@")) {
-					finalMsg.push(`<span class="tag">${subElem}</span>`);
-				} else {
-					finalMsg.push(subElem);
-				}
-			}
-			const final = finalMsg.join(" ");
-			listMsg.push(final);
-			addMsg(final);
+	const idData = [];
+	for (let elem of data) {
+		idData.push(elem[0]);
+	}
+	if (data === "no") {
+		msg.innerHTML = "";
+		setTimeout(fetchgetMessage, 100);
+		return;
+	}
+	for (let key in listMsg) {
+		if (!idData.includes(parseInt(key))) {
+			supprMsg(key);
+			delete listMsg[key];
+		}
+	}
+	for (let elem of data) {
+		if (listMsg[elem[0]] === undefined) {
+			listMsg[elem[0]] = elem[1];
+			addMsg(elem);
 		}
 	}
 	setTimeout(fetchgetMessage, 100);
