@@ -43,9 +43,9 @@ def receive_msg():  # pylint: disable=missing-function-docstring
         return "rick"
     if "/minecraft" in msg:
         add_message(
-            '<iframe src="https://funhtml5games.com?embed=mineblock" style="width:100%;height:100%;border:none;" frameborder="0" scrolling="no"></iframe>'
+            '<iframe src="https://funhtml5games.com?embed=mineblock" style="width:1600px;height:1200px;border:none;" frameborder="0" scrolling="no"></iframe>'
         )
-        return
+        ret
     add_message(msg)
     return "ok"
 
