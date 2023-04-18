@@ -11,6 +11,9 @@ function addMsg(elem) {
 	div.innerHTML = dataTraitement(elem[1]);
 	div.id = elem[0];
 	msg.appendChild(div);
+	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
+		return;
+	}
 	msg.scrollTo(0, document.body.scrollHeight);
 }
 
