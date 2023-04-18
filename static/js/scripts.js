@@ -60,7 +60,7 @@ function dataTraitement(elem) {
 
 function supprMsg(key) {
 	const removeElement = document.getElementById(key);
-	if (removeElement === undefined) {
+	if (removeElement === undefined || removeElement === null) {
 		return;
 	}
 	removeElement.remove();
