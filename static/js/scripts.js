@@ -6,6 +6,19 @@ let listMsg = {};
 const softBark = new Audio("static/music/soft_bark.mp3");
 const agressiveBark = new Audio("static/music/agressive_bark.mp3");
 
+const config = { childList: true };
+
+const callback = function (mutationsList, observer) {
+	for (let mutation of mutationsList) {
+		if (mutation.type === "childList") {
+			msg.scrollTo(0, document.body.scrollHeight);
+		}
+	}
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(msg, config);
+
 function addMsg(elem) {
 	const div = document.createElement("div");
 	div.innerHTML = dataTraitement(elem[1]);
