@@ -41,6 +41,11 @@ def receive_msg():  # pylint: disable=missing-function-docstring
             '<img src="https://media.tenor.com/CHc0B6gKHqUAAAAi/deadserver.gif">'
         )
         return "rick"
+    if "/minecraft" in msg:
+        add_message(
+            '<iframe src="https://funhtml5games.com?embed=mineblock" style="width:854px;height:480px;border:none;" frameborder="0" scrolling="no"></iframe>'
+        )
+        return
     add_message(msg)
     return "ok"
 
