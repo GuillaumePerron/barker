@@ -14,7 +14,7 @@ function addMsg(elem) {
 	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
 		return;
 	}
-	msg.scrollTo(0, document.body.scrollHeight);
+	msg.scrollTo(0, msg.scrollHeight);
 }
 
 function sendMessage() {
