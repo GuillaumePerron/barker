@@ -77,6 +77,7 @@ async function fetchgetMessage() {
 		idData.push(elem[0]);
 	}
 	if (data === "no") {
+		listMsg = {};
 		msg.innerHTML = "";
 		setTimeout(fetchgetMessage, 100);
 		return;
