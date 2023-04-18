@@ -59,7 +59,11 @@ function dataTraitement(elem) {
 }
 
 function supprMsg(key) {
-	document.getElementById(key).remove();
+	const removeElement = document.getElementById(key);
+	if (removeElement === undefined) {
+		return;
+	}
+	removeElement.remove();
 }
 
 async function fetchgetMessage() {
