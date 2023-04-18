@@ -3,6 +3,8 @@ const input = document.querySelector("#sendMsg");
 const msg = document.querySelector("#msg");
 const sendButton = document.querySelector("#send");
 let listMsg = {};
+const softBark = new Audio("static/music/soft_bark.mp3");
+const agressiveBark = new Audio("static/music/agressive_bark.mp3");
 
 function addMsg(elem) {
 	const div = document.createElement("div");
@@ -36,21 +38,22 @@ sendButton.addEventListener("click", (_) => {
 	sendMessage();
 });
 
-function dingDong() {
-	console.log("ding dong");
-}
-
 function dataTraitement(elem) {
+	let mention = false;
 	let finalMsg = [];
 	for (let subElem of elem.split(" ")) {
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === pseudo.value) {
-				dingDong();
+				agressiveBark.play();
+				mention = true;
 			}
 			finalMsg.push(`<span class="tag">${subElem}</span>`);
 		} else {
 			finalMsg.push(subElem);
 		}
+	}
+	if (!mention) {
+		softBark.play();
 	}
 	return finalMsg.join(" ");
 }
