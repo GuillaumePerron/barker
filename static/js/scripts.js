@@ -2,6 +2,7 @@ const pseudo = document.querySelector("#pseudo");
 const input = document.querySelector("#sendMsg");
 const msg = document.querySelector("#msg");
 const sendButton = document.querySelector("#send");
+const counterChar = document.querySelector("#counter");
 let listMsg = {};
 const softBark = new Audio("static/music/soft_bark.mp3");
 const agressiveBark = new Audio("static/music/agressive_bark.mp3");
@@ -32,7 +33,7 @@ function sendMessage() {
 	input.value = "";
 }
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener("keyup", (event) => {
 	if (event.keyCode !== 13) {
 		return;
 	}
@@ -86,6 +87,11 @@ function supprMsg(key) {
 	}
 	removeElement.remove();
 }
+input.addEventListener("keyup", countChar);
+
+function countChar(){
+	counterChar.innerText = input.value.length + "/280";
+}
 
 async function fetchgetMessage() {
 	const resp = await fetch("/msgFromServer", {
@@ -117,4 +123,5 @@ async function fetchgetMessage() {
 	}
 	setTimeout(fetchgetMessage, 100);
 }
+countChar();
 setTimeout(fetchgetMessage, 0);

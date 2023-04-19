@@ -1,6 +1,10 @@
 body,#msg,#sendMsg,#pseudo {
     background-color: #BFBF0C;
 }
+#counter{
+    margin-left: 10vw;
+    display: block;
+}
 
 #msg,#sendMsg{
     border: solid yellow 5px;
