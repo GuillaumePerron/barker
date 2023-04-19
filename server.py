@@ -30,22 +30,15 @@ def send_msg():  # pylint: disable=missing-function-docstring
 def receive_msg():  # pylint: disable=missing-function-docstring
     result = request.get_data()
     msg = result.decode("utf-8")
+    user = msg.split(":")[0]
     if "/reset" in msg:
         reset_table()
         return "reset"
-    if "/test" in msg:
-        add_message("bonsoir")
-        return "ptdrr"
     if "/rick" in msg:
         add_message(
-            '<img src="https://media.tenor.com/CHc0B6gKHqUAAAAi/deadserver.gif">'
+            f'{user}:<img src="https://media.tenor.com/CHc0B6gKHqUAAAAi/deadserver.gif">'
         )
         return "rick"
-    if "/minecraft" in msg:
-        add_message(
-            '<iframe src="https://funhtml5games.com?embed=mineblock" style="width:1200px;height:800px;border:none;" frameborder="0" scrolling="no"></iframe>'
-        )
-        ret
     add_message(msg)
     return "ok"
 

@@ -33,7 +33,7 @@ function sendMessage() {
 	input.value = "";
 	counterChar.innerText = "";
 }
-const invalidChar = [" ", "<", ">"];
+const invalidChar = [" ", "<", ">", ":"];
 function clearInvalidChar(str) {
 	for (let char of invalidChar) {
 		str = str.replaceAll(char, "");
@@ -43,7 +43,7 @@ function clearInvalidChar(str) {
 pseudo.addEventListener("keyup", (event) => {
 	event.target.value = clearInvalidChar(event.target.value);
 });
-document.addEventListener("keydown", (event) => {
+document.addEventListener("keyup", (event) => {
 	if (event.keyCode !== 13) {
 		return;
 	}
@@ -87,7 +87,8 @@ function dataTraitement(div, text) {
 function addMention(event) {
 	event.preventDefault();
 	const user = event.target.innerText.slice(0, -1);
-	input.value += `@${user}`;
+	input.value += `@${user} `;
+	input.focus();
 }
 
 function supprMsg(key) {
@@ -99,7 +100,7 @@ function supprMsg(key) {
 }
 input.addEventListener("keyup", countChar);
 
-function countChar(){
+function countChar() {
 	counterChar.innerText = input.value.length + "/280";
 }
 
