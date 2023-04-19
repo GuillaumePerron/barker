@@ -1,14 +1,35 @@
-#msg {
-    width: 95vw;
-    height: 80vh;
-    overflow: auto;
-    border: solid black 1px;
-    margin-left: auto;
-    margin-right: auto;
+body,#msg,#sendMsg,#pseudo {
+    background-color: #BFBF0C;
 }
+
+#msg,#sendMsg{
+    border: solid yellow 5px;
+    margin-left: 10vw;
+}
+
+#sendMsg{
+    width: 38vw;
+    height: 3vh;
+    overflow: auto;
+    margin-top: 2vh;
+}
+
+#msg {
+    color: yellow;
+    width: 40vw;
+    height: 70vh;
+    overflow: auto;
+}
+
+
+#pseudo{
+    border: solid yellow 5px;
+}
+
 #send{
     cursor: pointer;
 }
+
 .tag{
     background-color: lightblue;
 }
