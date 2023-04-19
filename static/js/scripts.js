@@ -32,7 +32,7 @@ function sendMessage() {
 	});
 	input.value = "";
 }
-const invalidChar = [" ", "<", ">"];
+const invalidChar = [" ", "<", ">", ":"];
 function clearInvalidChar(str) {
 	for (let char of invalidChar) {
 		str = str.replaceAll(char, "");
