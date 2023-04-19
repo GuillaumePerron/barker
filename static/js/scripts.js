@@ -8,7 +8,7 @@ const agressiveBark = new Audio("static/music/agressive_bark.mp3");
 
 function addMsg(elem) {
 	const div = document.createElement("div");
-	div.innerHTML = dataTraitement(elem[1]);
+	dataTraitement(div, elem[1]);
 	div.id = elem[0];
 	msg.appendChild(div);
 	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
@@ -42,10 +42,10 @@ sendButton.addEventListener("click", (_) => {
 	sendMessage();
 });
 
-function dataTraitement(elem) {
+function dataTraitement(div, text) {
 	let mention = false;
 	let finalMsg = [];
-	for (let subElem of elem.split(" ")) {
+	for (let subElem of text.split(" ")) {
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === pseudo.value) {
 				agressiveBark.play();
@@ -59,7 +59,24 @@ function dataTraitement(elem) {
 	if (!mention) {
 		softBark.play();
 	}
-	return finalMsg.join(" ");
+	const tmp = finalMsg.join(" ");
+	const tmpArray = tmp.split(":");
+	const user = tmpArray[0];
+	const userElement = document.createElement("strong");
+	const message = document.createElement("span");
+	userElement.innerText = user + ":";
+	userElement.classList.add("user");
+	userElement.addEventListener("click", addMention);
+	div.appendChild(userElement);
+	tmpArray[0] = "";
+	message.innerHTML += tmpArray.join(":").substring(1);
+	div.appendChild(message);
+}
+
+function addMention(event) {
+	event.preventDefault();
+	const user = event.target.innerText.slice(0, -1);
+	input.value += `@${user}`;
 }
 
 function supprMsg(key) {
