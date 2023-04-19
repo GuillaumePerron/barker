@@ -32,7 +32,7 @@ function sendMessage() {
 	input.value = "";
 }
 
-input.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
 	if (event.keyCode !== 13) {
 		return;
 	}
