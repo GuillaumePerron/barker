@@ -31,6 +31,7 @@ function sendMessage() {
 		body: `${pseudoMsg}: ${input.value}`,
 	});
 	input.value = "";
+	countChar();
 }
 const invalidChar = [" ", "<", ">", ":"];
 function clearInvalidChar(str) {
