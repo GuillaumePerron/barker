@@ -33,7 +33,9 @@ body,#msg,#sendMsg,#pseudo {
 #send{
     cursor: pointer;
 }
-
+.mention{
+    background-color: orange;
+}
 .tag{
     background-color: red;
 }

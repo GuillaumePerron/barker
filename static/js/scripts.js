@@ -58,7 +58,6 @@ function dataTraitement(div, text) {
 	for (let subElem of text.split(" ")) {
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === pseudo.value) {
-				agressiveBark.play();
 				mention = true;
 			}
 			finalMsg.push(`<span class="tag">${subElem}</span>`);
@@ -68,6 +67,9 @@ function dataTraitement(div, text) {
 	}
 	if (!mention) {
 		softBark.play();
+	} else {
+		agressiveBark.play();
+		div.classList.add("mention");
 	}
 	const tmp = finalMsg.join(" ");
 	const tmpArray = tmp.split(":");
