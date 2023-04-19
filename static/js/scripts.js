@@ -80,12 +80,18 @@ function dataTraitement(div, text) {
 	userElement.innerText = user + ":";
 	userElement.classList.add("user");
 	userElement.addEventListener("click", addMention);
+	userElement.addEventListener("mousedown", disableHighlightOnDoubleClick);
 	div.appendChild(userElement);
 	tmpArray[0] = "";
 	message.innerHTML += tmpArray.join(":").substring(1);
 	div.appendChild(message);
 }
 
+function disableHighlightOnDoubleClick(event) {
+	if (event.detail > 1) {
+		event.preventDefault();
+	}
+}
 function addMention(event) {
 	event.preventDefault();
 	const user = event.target.innerText.slice(0, -1);
