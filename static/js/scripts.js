@@ -42,7 +42,7 @@ function clearInvalidChar(str) {
 pseudo.addEventListener("keyup", (event) => {
 	event.target.value = clearInvalidChar(event.target.value);
 });
-document.addEventListener("keydown", (event) => {
+document.addEventListener("keyup", (event) => {
 	if (event.keyCode !== 13) {
 		return;
 	}
