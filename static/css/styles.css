@@ -31,7 +31,7 @@ body,#msg,#sendMsg,#pseudo {
 }
 
 .tag{
-    background-color: lightblue;
+    background-color: red;
 }
 .user{
     cursor: pointer;
