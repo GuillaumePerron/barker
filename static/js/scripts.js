@@ -33,13 +33,18 @@ function sendMessage() {
 	input.value = "";
 	countChar();
 }
-const invalidChar = [" ", "<", ">", ":"];
+const invalidChar = [" ", "<", ">", ":", "@"];
 function clearInvalidChar(str) {
 	for (let char of invalidChar) {
 		str = str.replaceAll(char, "");
 	}
 	return str;
 }
+pseudo.addEventListener("keydown", (event) => {
+	if (invalidChar.includes(event.key)) {
+		event.preventDefault();
+	}
+});
 pseudo.addEventListener("keyup", (event) => {
 	event.target.value = clearInvalidChar(event.target.value);
 });
