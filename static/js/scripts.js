@@ -28,7 +28,7 @@ function sendMessage() {
 	}
 	fetch("/msgFromHtml", {
 		method: "POST",
-		body: `${pseudoMsg}: ${input.value}`,
+		body: `${clearInvalidChar(pseudoMsg)}: ${input.value}`,
 	});
 	input.value = "";
 	countChar();
@@ -45,8 +45,18 @@ pseudo.addEventListener("keydown", (event) => {
 		event.preventDefault();
 	}
 });
-pseudo.addEventListener("keyup", (event) => {
+function clearPseudo(event) {
 	event.target.value = clearInvalidChar(event.target.value);
+}
+pseudo.addEventListener("drop", (event) => {
+	event.preventDefault();
+	let transfer = event.dataTransfer.getData("text");
+	pseudo.value += clearInvalidChar(transfer);
+});
+pseudo.addEventListener("paste", (event) => {
+	event.preventDefault();
+	let paste = (event.clipboardData || window.clipboardData).getData("text");
+	pseudo.value += clearInvalidChar(paste);
 });
 document.addEventListener("keydown", (event) => {
 	if (event.keyCode !== 13) {
