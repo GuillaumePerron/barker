@@ -28,7 +28,7 @@ function sendMessage() {
 	}
 	fetch("/msgFromHtml", {
 		method: "POST",
-		body: `${pseudoMsg}: ${input.value.replaceAll("\n", "")}`,
+		body: `${pseudoMsg}: ${input.value}`,
 	});
 	input.value = "";
 	countChar();
@@ -43,10 +43,11 @@ function clearInvalidChar(str) {
 pseudo.addEventListener("keyup", (event) => {
 	event.target.value = clearInvalidChar(event.target.value);
 });
-document.addEventListener("keyup", (event) => {
+document.addEventListener("keydown", (event) => {
 	if (event.keyCode !== 13) {
 		return;
 	}
+	event.preventDefault();
 	sendMessage();
 });
 sendButton.addEventListener("click", (_) => {
