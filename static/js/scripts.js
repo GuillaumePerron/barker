@@ -28,7 +28,7 @@ function sendMessage() {
 	}
 	fetch("/msgFromHtml", {
 		method: "POST",
-		body: `${pseudoMsg}: ${input.value}`,
+		body: `${pseudoMsg}: ${input.value.replaceAll("\n", "")}`,
 	});
 	input.value = "";
 	countChar();
@@ -57,6 +57,7 @@ function dataTraitement(div, text) {
 	let mention = false;
 	let finalMsg = [];
 	for (let subElem of text.split(" ")) {
+		console.log(subElem, pseudo.value);
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === pseudo.value) {
 				mention = true;
