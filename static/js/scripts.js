@@ -25,6 +25,12 @@ function sendMessage() {
 
 	let pseudoMsg = clearInvalidChar(pseudo.value);
 	pseudo.value = pseudoMsg;
+	if (pseudoMsg.length > 50) {
+		return;
+	}
+	if (input.value > 280) {
+		return;
+	}
 	if (pseudoMsg === "") {
 		pseudoMsg = "Anonyme";
 	}
