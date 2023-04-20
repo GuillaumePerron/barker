@@ -22,13 +22,15 @@ function sendMessage() {
 	if (input.value === "") {
 		return;
 	}
-	let pseudoMsg = pseudo.value;
+
+	let pseudoMsg = clearInvalidChar(pseudo.value);
+	pseudo.value = pseudoMsg;
 	if (pseudoMsg === "") {
 		pseudoMsg = "Anonyme";
 	}
 	fetch("/msgFromHtml", {
 		method: "POST",
-		body: `${clearInvalidChar(pseudoMsg)}: ${input.value}`,
+		body: `${pseudoMsg}: ${input.value}`,
 	});
 	input.value = "";
 	countChar();
