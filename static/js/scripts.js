@@ -9,7 +9,7 @@ let listMsg = {};
 const softBark = new Audio("static/music/soft_bark.mp3");
 const agressiveBark = new Audio("static/music/agressive_bark.mp3");
 const socket = io.connect(
-	"http://" + document.domain + ":" + location.port + "/chat"
+	"https://" + document.domain + ":" + location.port + "/chat"
 );
 function addMsg(elem) {
 	const div = document.createElement("div");
