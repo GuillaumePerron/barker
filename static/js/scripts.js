@@ -8,7 +8,9 @@ const counterChar = document.querySelector("#counter");
 let listMsg = {};
 const softBark = new Audio("static/music/soft_bark.mp3");
 const agressiveBark = new Audio("static/music/agressive_bark.mp3");
-const socket = io.connect("http://localhost/chat");
+const socket = io.connect(
+	"http://" + document.domain + ":" + location.port + "/chat"
+);
 function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
@@ -154,4 +156,3 @@ socket.on("msgToDel", function (key) {
 socket.on("init", function (tab) {
 	addMsgFromTab(tab);
 });
-
