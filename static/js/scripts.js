@@ -1,3 +1,5 @@
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
 const pseudo = document.querySelector("#pseudo");
 const input = document.querySelector("#sendMsg");
 const msg = document.querySelector("#msg");
@@ -6,7 +8,7 @@ const counterChar = document.querySelector("#counter");
 let listMsg = {};
 const softBark = new Audio("static/music/soft_bark.mp3");
 const agressiveBark = new Audio("static/music/agressive_bark.mp3");
-
+const socket = io.connect("http://localhost/chat");
 function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
@@ -34,10 +36,7 @@ function sendMessage() {
 	if (pseudoMsg === "") {
 		pseudoMsg = "Anonyme";
 	}
-	fetch("/msgFromHtml", {
-		method: "POST",
-		body: `${pseudoMsg}: ${input.value}`,
-	});
+	socket.emit("addMsg", `${pseudoMsg}: ${input.value}`);
 	input.value = "";
 	countChar();
 }
@@ -53,9 +52,7 @@ pseudo.addEventListener("keydown", (event) => {
 		event.preventDefault();
 	}
 });
-function clearPseudo(event) {
-	event.target.value = clearInvalidChar(event.target.value);
-}
+
 pseudo.addEventListener("drop", (event) => {
 	event.preventDefault();
 	let transfer = event.dataTransfer.getData("text");
@@ -81,7 +78,6 @@ function dataTraitement(div, text) {
 	let mention = false;
 	let finalMsg = [];
 	for (let subElem of text.split(" ")) {
-		console.log(subElem, pseudo.value);
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === pseudo.value) {
 				mention = true;
@@ -137,35 +133,25 @@ function countChar() {
 	counterChar.innerText = input.value.length + "/280";
 }
 
-async function fetchgetMessage() {
-	const resp = await fetch("/msgFromServer", {
-		method: "POST",
-		body: 0,
-	});
-	const data = await resp.json();
-	const idData = [];
-	for (let elem of data) {
-		idData.push(elem[0]);
-	}
-	if (data === "no") {
-		listMsg = {};
-		msg.innerHTML = "";
-		setTimeout(fetchgetMessage, 100);
-		return;
-	}
-	for (let key in listMsg) {
-		if (!idData.includes(parseInt(key))) {
-			supprMsg(key);
-			delete listMsg[key];
-		}
-	}
-	for (let elem of data) {
+countChar();
+
+function addMsgFromTab(tab) {
+	for (let elem of tab) {
 		if (listMsg[elem[0]] === undefined) {
 			listMsg[elem[0]] = elem[1];
 			addMsg(elem);
 		}
 	}
-	setTimeout(fetchgetMessage, 100);
 }
-countChar();
-setTimeout(fetchgetMessage, 0);
+
+socket.on("message", function (msgFromServ) {
+	addMsgFromTab(msgFromServ);
+});
+socket.emit("join", "join");
+socket.on("msgToDel", function (key) {
+	supprMsg(key);
+});
+socket.on("init", function (tab) {
+	addMsgFromTab(tab);
+});
+
