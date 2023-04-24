@@ -1,7 +1,7 @@
 import os
 from time import sleep
-from flask import Flask, render_template, request
-from flask_socketio import SocketIO, send, emit
+from flask import Flask, render_template
+from flask_socketio import SocketIO, emit
 from database import add_message, get_data, reset_table, auto_delete
 
 
