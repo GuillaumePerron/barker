@@ -11,6 +11,7 @@ function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
 	div.id = elem[0];
+	div.classList.add("bark");
 	msg.appendChild(div);
 	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
 		return;

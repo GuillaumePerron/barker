@@ -1,14 +1,15 @@
 body,#msg,#sendMsg,#pseudo {
     background-color: #BFBF0C;
 }
+
 #counter{
     margin-left: 10vw;
     display: block;
 }
 
 #msg,#sendMsg{
-    border: solid yellow 5px;
-    margin-left: 10vw;
+    justify-content: center;
+    margin:auto;
 }
 
 #sendMsg{
@@ -20,11 +21,34 @@ body,#msg,#sendMsg,#pseudo {
 
 #msg {
     color: yellow;
-    width: 40vw;
-    height: 70vh;
-    overflow: auto;
 }
 
+.bark > span{
+    overflow-wrap: break-word;
+}
+
+.bark{
+    background-color: #303030;
+    width: 300px;
+    justify-content: center;
+    margin:auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: solid yellow 5px;
+    border-radius: 10px;
+}
+
+.zonedemessage{
+    position: fixed;
+    bottom: 0px;
+    left: 32vw;
+    background-color: #BFBF0C;
+}
+
+
+.bark > strong{
+    display: block;
+}
 
 #pseudo{
     border: solid yellow 5px;
