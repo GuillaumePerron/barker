@@ -11,6 +11,7 @@ function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
 	div.id = elem[0];
+	div.classList.add("bark");
 	msg.appendChild(div);
 	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
 		return;
@@ -25,12 +26,6 @@ function sendMessage() {
 
 	let pseudoMsg = clearInvalidChar(pseudo.value);
 	pseudo.value = pseudoMsg;
-	if (pseudoMsg.length > 50) {
-		return;
-	}
-	if (input.value > 280) {
-		return;
-	}
 	if (pseudoMsg === "") {
 		pseudoMsg = "Anonyme";
 	}
@@ -81,7 +76,6 @@ function dataTraitement(div, text) {
 	let mention = false;
 	let finalMsg = [];
 	for (let subElem of text.split(" ")) {
-		console.log(subElem, pseudo.value);
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === pseudo.value) {
 				mention = true;
