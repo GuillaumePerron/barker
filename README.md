@@ -1,5 +1,5 @@
 # Barker
-[![](images/barker-logo.png)](https://barker-guillaumeperron.vercel.app/)
+[![](static/images/barker-logo.png)](https://barker-guillaumeperron.vercel.app/)
 - **Nom de l’entreprise :** Banana Software
 - **Nom de l’application :** Barker
 - **Logo :** Chien jaune  
@@ -18,17 +18,17 @@
 - **Gestion des tâches :** [Notion](https://www.notion.so/barker-app/442e4bcd0ca04b71a3a1025f0861f070?v=75ab636be9d444e7bc8e98b9fe2ff275)
 
 # Lancer le site en local : (être dans le dossier site)
-- **Programme nécessaire :**
-  - *Clicker [ici](https://www.python.org/downloads/) pour installer Python*
-  - *Clicker [ici](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) pour installer Postgres*
-- **Instalation des packages Pyhton :**
-  - *pip install requirements.txt*
+- **Programmes nécessaires :**
+  - *Cliquer [ici](https://www.python.org/downloads/) pour installer Python*
+  - *Cliquer [ici](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) pour installer Postgres*
+- **Installation des packages Python :**
+  - `pip install -r requirements.txt`
 - **Initialisation de la base de données :**
-  - *Mettre le dossier `PostgreSQL\15\bin` dans le path pour utiliser la commande psql ([une aide si vous ne savez pas faire](https://www.malekal.com/comment-modifier-la-variable-path-sous-windows-10-11/))*
-  - *se connecter a la base de données en tant que postgres (`psql --username==postgres` a éxecuter dans un invite de commande(win + r et taper cmd))*
-  - *create user barker password 'barker';*
-  - *create database barker with owner barker;*
-  - *Créer un fichier .env qui contient*
+  - *Mettre le dossier `PostgreSQL\15\bin` dans le path pour utiliser la commande `psql` ([une aide si vous ne savez pas faire](https://www.malekal.com/comment-modifier-la-variable-path-sous-windows-10-11/))*
+  - *Se connecter à la base de données en tant que `postgres` : `psql --username==postgres` (à exécuter dans un invite de commandes (`win + r` et taper `cmd`))*
+  - `CREATE USER barker PASSWORD 'barker';`
+  - `CREATE DATABASE barker WITH OWNER barker;`
+  - *Créer un fichier `.env` qui contient*
     ```ini
     HOST=localhost
     PORT=5432
@@ -36,7 +36,8 @@
     USER=barker
     PASSWORD=barker
     ```
+  - `python database.py`
 - **Lancer le serveur :**
-  - *python server.py*
-  - *aller a l'url http://localhost*
+  - `python server.py`
+  - *Aller à l'URL http://localhost*
   
