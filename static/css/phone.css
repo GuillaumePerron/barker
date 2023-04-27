@@ -1,52 +1,60 @@
 @media (min-width: 0px) {
-    *{
+    * {
         font-size: 60px;
     }
-    .bark{
+
+    .barkDisplay {
         width: 130%;
     }
-    svg{
+
+    svg {
         width: 5%;
     }
 
-    #sendMsg{
-        width: 80%;
+    #barkWrite {
+        border: 10px solid #FFFF13;
         margin-left: 10%;
-        border: 10px solid black;
+        width: 80%;
     }
-    #counter {
-        margin-left: 10vw;
+
+    #barkCounter {
         display: block;
+        margin-left: 10vw;
     }
-    #pseudo{
+
+    #username {
         width: 70%;
     }
-    .bark:last-child{
+
+    .barkDisplay:last-child {
         margin-bottom: 250px;
     }
 }
+
 @media (min-width: 992px) {
-    *{
+    * {
         font-size: 20px;
     }
-    .bark{
-        width: 35vw;
 
+    .barkDisplay {
+        width: 35vw;
     }
-    svg{
+
+    svg {
         height: 40px;
     }
-    .zonedemessage{
+
+    .barkWriteArea {
         left: 30%;
     }
-    #sendMsg{
-        width: 20%;
+
+    #barkWrite {
+        border: 3px solid #FFFF13;
         margin-left: 10%;
-        border: 3px solid black;
-    }
-    .bark:last-child{
-        margin-bottom: 100px;
+        width: 20%;
     }
 
-    
+    .barkDisplay:last-child {
+        margin-bottom: 100px;
+    }
 }

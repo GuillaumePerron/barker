@@ -1,20 +1,19 @@
-const pseudo = document.querySelector("#pseudo");
-const input = document.querySelector("#sendMsg");
-const msg = document.querySelector("#msg");
-const sendButton = document.querySelector("#send");
-const counterChar = document.querySelector("#counter");
-let listMsg = {};
-const softBark = new Audio("static/music/soft_bark.mp3");
-const agressiveBark = new Audio("static/music/agressive_bark.mp3");
-const urlParams = new URLSearchParams(window.location.search);
-let hashtag = urlParams.get("hashtag");
-let mainPage = false;
+const username    = document.querySelector("#username"),
+	  timeline    = document.querySelector("#timeline"),
+	  input       = document.querySelector("#barkWrite"),
+	  sendButton  = document.querySelector("#barkSend"),
+	  counterChar = document.querySelector("#barkCounter"),
+	  softBark      = new Audio("static/music/soft_bark.mp3"),
+	  agressiveBark = new Audio("static/music/agressive_bark.mp3"),
+	  urlParams     = new URLSearchParams(window.location.search);
+let listMsg = {},
+	hashtag = urlParams.get("hashtag"),
+	mainPage = false;
 if (hashtag === null) {
 	hashtag = "null";
 	mainPage = true;
-} else {
+} else
 	document.title = "Barker | " + hashtag;
-}
 
 document.querySelector("#logo").addEventListener("click", (_) => {
 	changeUrl();
@@ -23,9 +22,7 @@ document.querySelector("#logo").addEventListener("click", (_) => {
 function changeUrl(newHashtag) {
 	const url = new URL(window.location);
 	let nextURL = url.pathname;
-	if (newHashtag !== undefined) {
-		nextURL = `${url.pathname}?hashtag=${newHashtag.replaceAll("#", "")}`;
-	}
+	if (newHashtag !== undefined) nextURL = `${url.pathname}?hashtag=${newHashtag.replaceAll("#", "")}`;
 	window.location.href = nextURL;
 }
 
@@ -33,27 +30,19 @@ function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
 	div.id = elem[0];
-	div.classList.add("bark");
+	div.classList.add("barkDisplay");
 	div.querySelectorAll(".hashtag").forEach((element) => {
 		element.addEventListener("click", hashtagHandler);
 	});
-	if (msg.childNodes.length === 0) {
-		msg.appendChild(div);
-	} else {
-		msg.insertBefore(div, msg.firstChild);
-	}
+	if (timeline.childNodes.length === 0) timeline.appendChild(div);
+	else                                  timeline.insertBefore(div, timeline.firstChild);
 }
 
 function sendMessage() {
-	if (input.value === "") {
-		return;
-	}
-
-	let pseudoMsg = clearInvalidChar(pseudo.value);
-	pseudo.value = pseudoMsg;
-	if (pseudoMsg === "") {
-		pseudoMsg = "Anonyme";
-	}
+	if (input.value === "") return;
+	let pseudoMsg = clearInvalidChar(username.value);
+	username.value = pseudoMsg;
+	if (pseudoMsg === "") pseudoMsg = "Anonyme";
 	fetch("/msgFromHtml", {
 		method: "POST",
 		body: `${pseudoMsg}: ${input.value}`,
@@ -61,72 +50,71 @@ function sendMessage() {
 	input.value = "";
 	countChar();
 }
+
 const invalidChar = [" ", "<", ">", ":", "@", "#"];
+
 function clearInvalidChar(str) {
-	for (let char of invalidChar) {
-		str = str.replaceAll(char, "");
-	}
+	for (let char of invalidChar) str = str.replaceAll(char, "");
 	return str;
 }
-pseudo.addEventListener("keydown", (event) => {
-	if (invalidChar.includes(event.key)) {
-		event.preventDefault();
-	}
+
+username.addEventListener("keydown", (event) => {
+	if (invalidChar.includes(event.key)) event.preventDefault();
 });
+
 function clearPseudo(event) {
 	event.target.value = clearInvalidChar(event.target.value);
 }
-pseudo.addEventListener("drop", (event) => {
+
+username.addEventListener("drop", (event) => {
 	event.preventDefault();
 	let transfer = event.dataTransfer.getData("text");
-	pseudo.value += clearInvalidChar(transfer);
+	username.value += clearInvalidChar(transfer);
 });
-pseudo.addEventListener("paste", (event) => {
+
+username.addEventListener("paste", (event) => {
 	event.preventDefault();
 	let paste = (event.clipboardData || window.clipboardData).getData("text");
-	pseudo.value += clearInvalidChar(paste);
+	username.value += clearInvalidChar(paste);
 });
+
 document.addEventListener("keydown", (event) => {
-	if (event.keyCode !== 13) {
-		return;
-	}
+	if (event.keyCode !== 13) return;
 	event.preventDefault();
 	sendMessage();
 });
+
 sendButton.addEventListener("click", (_) => {
 	sendMessage();
 });
+
 function hashtagHandler(event) {
 	const hashtagFromHtml = event.target.innerText;
 	changeUrl(hashtagFromHtml);
 }
 
 function dataTraitement(div, text) {
-	let mention = false;
-	let finalMsg = [];
+	let mention = false,
+		finalMsg = [];
 	for (let subElem of text.split(" ")) {
 		if (subElem[0] === "@") {
-			if (subElem.substring(1) === pseudo.value) {
-				mention = true;
-			}
+			if (subElem.substring(1) === username.value) mention = true;
 			finalMsg.push(`<span class="tag">${subElem}</span>`);
-		} else if (subElem[0] === "#" && subElem !== "#") {
+		} else if (subElem[0] === "#" && subElem !== "#")
 			finalMsg.push(`<span class="hashtag" >${subElem}</span>`);
-		} else {
+		else
 			finalMsg.push(subElem);
-		}
 	}
-	if (!mention) {
-		softBark.play();
-	} else {
+	if (!mention) softBark.play();
+	else {
 		agressiveBark.play();
 		div.classList.add("mention");
 	}
-	const tmp = finalMsg.join(" ");
-	const tmpArray = tmp.split(":");
-	const user = tmpArray[0];
-	const userElement = document.createElement("strong");
-	const message = document.createElement("span");
+	const tmp         = finalMsg.join(" "),
+		  tmpArray    = tmp.split(":"),
+		  user        = tmpArray[0],
+		  userElement = document.createElement("strong"),
+		  message     = document.createElement("span");
 	userElement.innerText = user + ":";
 	userElement.classList.add("user");
 	userElement.addEventListener("click", addMention);
@@ -138,10 +126,9 @@ function dataTraitement(div, text) {
 }
 
 function disableHighlightOnDoubleClick(event) {
-	if (event.detail > 1) {
-		event.preventDefault();
-	}
+	if (event.detail > 1) event.preventDefault();
 }
+
 function addMention(event) {
 	event.preventDefault();
 	const user = event.target.innerText.slice(0, -1);
@@ -151,11 +138,10 @@ function addMention(event) {
 
 function supprMsg(key) {
 	const removeElement = document.getElementById(key);
-	if (removeElement === undefined || removeElement === null) {
-		return;
-	}
+	if (removeElement === undefined || removeElement === null) return;
 	removeElement.remove();
 }
+
 input.addEventListener("keyup", countChar);
 
 function countChar() {
@@ -172,12 +158,10 @@ async function fetchgetMessage() {
 	});
 	const data = await resp.json();
 	const idData = [];
-	for (let elem of data) {
-		idData.push(elem[0]);
-	}
+	for (let elem of data) idData.push(elem[0]);
 	if (data === "no") {
 		listMsg = {};
-		msg.innerHTML = "";
+		timeline.innerHTML = "";
 		setTimeout(fetchgetMessage, 100);
 		return;
 	}
@@ -195,5 +179,6 @@ async function fetchgetMessage() {
 	}
 	setTimeout(fetchgetMessage, 100);
 }
+
 countChar();
 setTimeout(fetchgetMessage, 0);

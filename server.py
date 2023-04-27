@@ -22,7 +22,6 @@ def send_msg():  # pylint: disable=missing-function-docstring
     main_page = result["mainPage"]
     auto_delete()
     msg = get_data(main_page, "#" + hashtag)
-
     return jsonify(msg)
 
 

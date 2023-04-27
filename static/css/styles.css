@@ -5,74 +5,80 @@
     src: url("../fonts/GT-America-Standard-Regular-Trial.otf") format("truetype");
 }
 
-body, #msg, #sendMsg, #pseudo {
-    background-color: #BFBF0C;
+body, #timeline, #barkWrite, #username {
+    background-color: #303030;
     font-family: "GT-America-Standard-Regular-Trial", sans-serif;
 }
 
-
-#counter {
-    margin-left: 10vw;
-    display: block;
+.text, .icons {
+    color: #FFFF13;
 }
 
-#msg, #sendMsg {
+#barkCounter {
+    display: block;
+    margin-left: 10vw;
+}
+
+#timeline, #barkWrite {
     justify-content: center;
     margin: auto;
 }
 
-#sendMsg {
-    height: 3vh;
-    overflow: auto;
+#barkWrite {
+    background-color: #131516;
+    border: 10px solid #FFFF13;
+    height: 4vh;
     margin-top: 2vh;
-    border: 10px solid black;
+    overflow: auto;
+    resize: none;
 }
 
-#msg {
-    color: yellow;
-}
-
-.bark>span {
+.barkDisplay>span {
     overflow-wrap: break-word;
 }
 
-.bark {
-    background-color: #303030;
+.barkDisplay {
+    background-color: #131516;
+    border: solid #FFFF13 5px;
+    border-radius: 10px;
     justify-content: center;
     margin: auto;
-    width: 35%;
     margin-bottom: 20px;
     padding: 20px;
-    border: solid yellow 5px;
-    border-radius: 10px;
+    width: 35%;
 }
 
-.zonedemessage {
-    position: fixed;
+.barkWriteArea {
+    background-color: #303030;
     bottom: 0px;
-    background-color: #BFBF0C;
+    position: fixed;
     width: 100%;
 }
 
-
-.bark>strong {
+.barkDisplay>strong {
     display: block;
 }
 
-#pseudo {
-    border: solid yellow 5px;
+#username {
+    background-color: #131516;
+    border: solid #FFFF13 5px;
+    margin-left: 10px;
 }
 
-#send ,#logo , .hashtag{
+#barkSend, #logo, .hashtag {
     cursor: pointer;
 }
 
-.mention ,.hashtag{
-    background-color: orange;
+input:focus, textarea:focus {
+    outline: none;
+}
+
+.mention, .hashtag {
+    background-color: #1389FF;
 }
 
 .tag {
-    background-color: red;
+    background-color: #8913FF;
 }
 
 .user {
@@ -80,10 +86,10 @@ body, #msg, #sendMsg, #pseudo {
 }
 
 header {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
+    display: flex;
     height: 80px;
+    justify-content: space-between;
     padding: 0 20px;
 }
 
@@ -92,11 +98,10 @@ header img {
 }
 
 header div {
-    display: flex;
     align-items: center;
+    display: flex;
 }
 
 header div p {
     margin-right: 16px;
 }
-
