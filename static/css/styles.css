@@ -21,10 +21,10 @@ body, #msg, #sendMsg, #pseudo {
 }
 
 #sendMsg {
-    width: 38vw;
     height: 3vh;
     overflow: auto;
     margin-top: 2vh;
+    border: 10px solid black;
 }
 
 #msg {
@@ -37,9 +37,9 @@ body, #msg, #sendMsg, #pseudo {
 
 .bark {
     background-color: #303030;
-    width: 35vw;
     justify-content: center;
     margin: auto;
+    width: 35vw;
     margin-bottom: 20px;
     padding: 20px;
     border: solid yellow 5px;
@@ -49,9 +49,10 @@ body, #msg, #sendMsg, #pseudo {
 .zonedemessage {
     position: fixed;
     bottom: 0px;
-    left: 32vw;
     background-color: #BFBF0C;
+    width: 100%;
 }
+
 
 .bark>strong {
     display: block;
@@ -97,3 +98,4 @@ header div {
 header div p {
     margin-right: 16px;
 }
+

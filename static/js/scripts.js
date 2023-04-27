@@ -12,7 +12,12 @@ function addMsg(elem) {
 	dataTraitement(div, elem[1]);
 	div.id = elem[0];
 	div.classList.add("bark");
-	msg.appendChild(div);
+	if (msg.childNodes.length === 0) {
+		msg.appendChild(div);
+	} else {
+		msg.insertBefore(div, msg.firstChild);
+	}
+
 	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
 		return;
 	}
