@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify, render_template, request
 from database import add_message, get_data, reset_table, auto_delete
+import json
 
 
 os.chdir(os.path.dirname(__file__))
@@ -16,14 +17,13 @@ def index():  # pylint: disable=missing-function-docstring
 
 @app.route("/msgFromServer", methods=["POST"])
 def send_msg():  # pylint: disable=missing-function-docstring
-    data = request.get_data()
-    number = int(data)
+    result = json.loads(request.get_data())
+    hashtag = result["hashtag"]
+    main_page = result["mainPage"]
     auto_delete()
-    msg = get_data()
-    print(msg)
-    if number == len(msg):
-        return jsonify("no")
-    return jsonify(msg[number: len(msg)])
+    msg = get_data(main_page, "#" + hashtag)
+
+    return jsonify(msg)
 
 
 @app.route("/msgFromHtml", methods=["POST"])

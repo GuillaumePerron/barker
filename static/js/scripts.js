@@ -6,22 +6,42 @@ const counterChar = document.querySelector("#counter");
 let listMsg = {};
 const softBark = new Audio("static/music/soft_bark.mp3");
 const agressiveBark = new Audio("static/music/agressive_bark.mp3");
+const urlParams = new URLSearchParams(window.location.search);
+let hashtag = urlParams.get("hashtag");
+let mainPage = false;
+if (hashtag === null) {
+	hashtag = "null";
+	mainPage = true;
+} else {
+	document.title = "Barker | " + hashtag;
+}
+
+document.querySelector("#logo").addEventListener("click", (_) => {
+	changeUrl();
+});
+
+function changeUrl(newHashtag) {
+	const url = new URL(window.location);
+	let nextURL = url.pathname;
+	if (newHashtag !== undefined) {
+		nextURL = `${url.pathname}?hashtag=${newHashtag.replaceAll("#", "")}`;
+	}
+	window.location.href = nextURL;
+}
 
 function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
 	div.id = elem[0];
 	div.classList.add("bark");
+	div.querySelectorAll(".hashtag").forEach((element) => {
+		element.addEventListener("click", hashtagHandler);
+	});
 	if (msg.childNodes.length === 0) {
 		msg.appendChild(div);
 	} else {
 		msg.insertBefore(div, msg.firstChild);
 	}
-
-	if (msg.offsetHeight - (msg.scrollHeight - msg.scrollTop) < -100) {
-		return;
-	}
-	msg.scrollTo(0, msg.scrollHeight);
 }
 
 function sendMessage() {
@@ -41,7 +61,7 @@ function sendMessage() {
 	input.value = "";
 	countChar();
 }
-const invalidChar = [" ", "<", ">", ":", "@"];
+const invalidChar = [" ", "<", ">", ":", "@", "#"];
 function clearInvalidChar(str) {
 	for (let char of invalidChar) {
 		str = str.replaceAll(char, "");
@@ -76,6 +96,10 @@ document.addEventListener("keydown", (event) => {
 sendButton.addEventListener("click", (_) => {
 	sendMessage();
 });
+function hashtagHandler(event) {
+	const hashtagFromHtml = event.target.innerText;
+	changeUrl(hashtagFromHtml);
+}
 
 function dataTraitement(div, text) {
 	let mention = false;
@@ -86,6 +110,9 @@ function dataTraitement(div, text) {
 				mention = true;
 			}
 			finalMsg.push(`<span class="tag">${subElem}</span>`);
+		}
+		if (subElem[0] === "#") {
+			finalMsg.push(`<span class="hashtag" >${subElem}</span>`);
 		} else {
 			finalMsg.push(subElem);
 		}
@@ -139,7 +166,10 @@ function countChar() {
 async function fetchgetMessage() {
 	const resp = await fetch("/msgFromServer", {
 		method: "POST",
-		body: 0,
+		body: JSON.stringify({
+			hashtag,
+			mainPage,
+		}),
 	});
 	const data = await resp.json();
 	const idData = [];

@@ -32,12 +32,20 @@ def reset_table():  # pylint: disable=missing-function-docstring
                 cur.execute(file.read())
 
 
-def get_data():  # pylint: disable=missing-function-docstring
+def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
-            cur.execute(
-                "select id_data,un_text from data where active=true ORDER BY date_creation ASC;"
-            )
+            if main_page:
+                cur.execute(
+                    "select id_data,un_text from data where active=true ORDER BY date_creation ASC;"
+                )
+            else:
+                cur.execute(
+                    """select id_data,un_text from data 
+                        where active=true AND un_text LIKE %(hashtag)s
+                        ORDER BY date_creation ASC;""",
+                    {"hashtag": "%{}%".format(hashtag)},
+                )
             res = []
             for x in cur.fetchall():
                 res.append(x)

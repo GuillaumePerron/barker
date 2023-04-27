@@ -10,6 +10,7 @@ body, #msg, #sendMsg, #pseudo {
     font-family: "GT-America-Standard-Regular-Trial", sans-serif;
 }
 
+
 #counter {
     margin-left: 10vw;
     display: block;
@@ -39,7 +40,7 @@ body, #msg, #sendMsg, #pseudo {
     background-color: #303030;
     justify-content: center;
     margin: auto;
-    width: 35vw;
+    width: 35%;
     margin-bottom: 20px;
     padding: 20px;
     border: solid yellow 5px;
@@ -62,11 +63,11 @@ body, #msg, #sendMsg, #pseudo {
     border: solid yellow 5px;
 }
 
-#send {
+#send ,#logo , .hashtag{
     cursor: pointer;
 }
 
-.mention {
+.mention ,.hashtag{
     background-color: orange;
 }
 
