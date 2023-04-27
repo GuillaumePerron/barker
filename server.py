@@ -23,7 +23,7 @@ def send_msg():  # pylint: disable=missing-function-docstring
     print(msg)
     if number == len(msg):
         return jsonify("no")
-    return jsonify(msg[number : len(msg)])
+    return jsonify(msg[number: len(msg)])
 
 
 @app.route("/msgFromHtml", methods=["POST"])

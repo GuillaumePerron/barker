@@ -1,18 +1,26 @@
-body,#msg,#sendMsg,#pseudo {
-    background-color: #BFBF0C;
+@font-face {
+    font-family: "GT-America-Standard-Regular-Trial";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/GT-America-Standard-Regular-Trial.otf") format("truetype");
 }
 
-#counter{
+body, #msg, #sendMsg, #pseudo {
+    background-color: #BFBF0C;
+    font-family: "GT-America-Standard-Regular-Trial", sans-serif;
+}
+
+#counter {
     margin-left: 10vw;
     display: block;
 }
 
-#msg,#sendMsg{
+#msg, #sendMsg {
     justify-content: center;
-    margin:auto;
+    margin: auto;
 }
 
-#sendMsg{
+#sendMsg {
     width: 38vw;
     height: 3vh;
     overflow: auto;
@@ -23,47 +31,49 @@ body,#msg,#sendMsg,#pseudo {
     color: yellow;
 }
 
-.bark > span{
+.bark>span {
     overflow-wrap: break-word;
 }
 
-.bark{
+.bark {
     background-color: #303030;
     width: 300px;
     justify-content: center;
-    margin:auto;
+    margin: auto;
     margin-bottom: 20px;
     padding: 20px;
     border: solid yellow 5px;
     border-radius: 10px;
 }
 
-.zonedemessage{
+.zonedemessage {
     position: fixed;
     bottom: 0px;
     left: 32vw;
     background-color: #BFBF0C;
 }
 
-
-.bark > strong{
+.bark>strong {
     display: block;
 }
 
-#pseudo{
+#pseudo {
     border: solid yellow 5px;
 }
 
-#send{
+#send {
     cursor: pointer;
 }
-.mention{
+
+.mention {
     background-color: orange;
 }
-.tag{
+
+.tag {
     background-color: red;
 }
-.user{
+
+.user {
     cursor: pointer;
 }
 
@@ -77,7 +87,6 @@ header {
 
 header img {
     height: 50px;
-    width: 200px;
 }
 
 header div {

@@ -1,5 +1,5 @@
 # Barker
-[![](images/barker-logo.png)](https://barker-guillaumeperron.vercel.app/)
+[![](static/images/barker-logo.png)](https://barker-guillaumeperron.vercel.app/)
 - **Nom de l’entreprise :** Banana Software
 - **Nom de l’application :** Barker
 - **Logo :** Chien jaune  
@@ -19,17 +19,17 @@
 
 # Lancer le projet en local :
 
-- **Programme nécessaire :**
+- **Programmes nécessaires :**
   - *Python*
   - *Postgres*
-- **Instalation des packages Pyhton :**
-  - *pip install requirements.txt*
+- **Instalation des packages Python :**
+  - `pip install -r requirements.txt`
 - **Initialisation de la base de données :**
-  - *Mettre le dossier PostgreSQL\15\bin dans le path pour utiliser la commande psql*
-  - *se connecter a la base de données en tant que postgres (psql --username==postgres)*
-  - *create user barker password 'barker';*
-  - *create database barker with owner barker;*
-  - *Créer un fichier .env qui contient*
+  - *Mettre le dossier PostgreSQL\15\bin dans le path pour utiliser la commande `psql`*
+  - *Se connecter à la base de données en tant que `postgres` : `psql --username==postgres`*
+  - `CREATE USER barker PASSWORD 'barker';`
+  - `CREATE DATABASE barker WITH OWNER barker;`
+  - *Créer un fichier `.env` qui contient*
     ```ini
     HOST=localhost
     PORT=5432
@@ -37,7 +37,8 @@
     USER=barker
     PASSWORD=barker
     ```
+  - `python database.py`
 - **Lancer le serveur :**
-  - *python server.py*
-  - *aller a l'url http://localhost*
+  - `python server.py`
+  - *Aller à l'URL http://localhost*
   
