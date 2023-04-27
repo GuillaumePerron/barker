@@ -19,8 +19,8 @@
 
 # Lancer le site en local : (être dans le dossier site)
 - **Programme nécessaire :**
-  - *[Python](https://www.python.org/downloads/)*
-  - *[Postgres](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)*
+  - *Clicker [ici](https://www.python.org/downloads/) pour installer Python*
+  - *Clicker [ici](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) pour installer Postgres*
 - **Instalation des packages Pyhton :**
   - *pip install requirements.txt*
 - **Initialisation de la base de données :**
