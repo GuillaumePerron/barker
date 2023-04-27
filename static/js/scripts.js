@@ -111,7 +111,7 @@ function dataTraitement(div, text) {
 			}
 			finalMsg.push(`<span class="tag">${subElem}</span>`);
 		}
-		if (subElem[0] === "#") {
+		if (subElem[0] === "#" && subElem !== "#") {
 			finalMsg.push(`<span class="hashtag" >${subElem}</span>`);
 		} else {
 			finalMsg.push(subElem);
