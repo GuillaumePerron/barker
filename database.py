@@ -46,12 +46,13 @@ def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
                     "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
                 )
             else:
+                hashtag_format = "%{}%".format(hashtag)
                 cur.execute(
                     """select id_data,un_text from data 
                         where un_text LIKE %(hashtag)s
-                        AND date_creation + (interval '1 minute') <= CURRENT_TIMESTAMP
+                        AND  date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP
                         ORDER BY date_creation ASC;""",
-                    {"hashtag": "%{}%".format(hashtag)},
+                    {"hashtag": hashtag_format},
                 )
             res = []
             for x in cur.fetchall():
