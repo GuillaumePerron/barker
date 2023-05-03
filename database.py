@@ -37,12 +37,13 @@ def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
         with conn.cursor() as cur:
             if main_page:
                 cur.execute(
-                    "select id_data,un_text from data where active=true ORDER BY date_creation ASC;"
+                    "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
                 )
             else:
                 cur.execute(
                     """select id_data,un_text from data 
-                        where active=true AND un_text LIKE %(hashtag)s
+                        where un_text LIKE %(hashtag)s
+                        AND date_creation + (interval '1 minute') <= CURRENT_TIMESTAMP
                         ORDER BY date_creation ASC;""",
                     {"hashtag": "%{}%".format(hashtag)},
                 )
@@ -61,12 +62,6 @@ def add_message(msg):  # pylint: disable=missing-function-docstring
                     "msg": str(msg),
                 },
             )
-
-
-def auto_delete():
-    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
-        with conn.cursor() as cur:
-            cur.execute("select update_ancien_msg();")
 
 
 if __name__ == "__main__":

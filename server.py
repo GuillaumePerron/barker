@@ -1,6 +1,6 @@
 import os
 from flask import Flask, jsonify, render_template, request
-from database import add_message, get_data, reset_table, auto_delete
+from database import add_message, get_data, reset_table
 import json
 
 
@@ -20,7 +20,6 @@ def send_msg():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     hashtag = result["hashtag"]
     main_page = result["mainPage"]
-    auto_delete()
     msg = get_data(main_page, "#" + hashtag)
     return jsonify(msg)
 
