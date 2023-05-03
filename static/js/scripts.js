@@ -1,11 +1,11 @@
-const username    = document.querySelector("#username"),
-	  timeline    = document.querySelector("#timeline"),
-	  input       = document.querySelector("#barkWrite"),
-	  sendButton  = document.querySelector("#barkSend"),
-	  counterChar = document.querySelector("#barkCounter"),
-	  softBark      = new Audio("static/music/soft_bark.mp3"),
-	  agressiveBark = new Audio("static/music/agressive_bark.mp3"),
-	  urlParams     = new URLSearchParams(window.location.search);
+const username = document.querySelector("#username"),
+	timeline = document.querySelector("#timeline"),
+	input = document.querySelector("#barkWrite"),
+	sendButton = document.querySelector("#barkSend"),
+	counterChar = document.querySelector("#barkCounter"),
+	softBark = new Audio("static/music/soft_bark.mp3"),
+	agressiveBark = new Audio("static/music/agressive_bark.mp3"),
+	urlParams = new URLSearchParams(window.location.search);
 let listMsg = {},
 	hashtag = urlParams.get("hashtag"),
 	mainPage = false;
@@ -35,7 +35,7 @@ function addMsg(elem) {
 		element.addEventListener("click", hashtagHandler);
 	});
 	if (timeline.childNodes.length === 0) timeline.appendChild(div);
-	else                                  timeline.insertBefore(div, timeline.firstChild);
+	else timeline.insertBefore(div, timeline.firstChild);
 }
 
 function sendMessage() {
@@ -110,11 +110,11 @@ function dataTraitement(div, text) {
 		agressiveBark.play();
 		div.classList.add("mention");
 	}
-	const tmp         = finalMsg.join(" "),
-		  tmpArray    = tmp.split(":"),
-		  user        = tmpArray[0],
-		  userElement = document.createElement("strong"),
-		  message     = document.createElement("span");
+	const tmp = finalMsg.join(" "),
+		tmpArray = tmp.split(":"),
+		user = tmpArray[0],
+		userElement = document.createElement("strong"),
+		message = document.createElement("span");
 	userElement.innerText = user + ":";
 	userElement.classList.add("user");
 	userElement.addEventListener("click", addMention);
@@ -179,6 +179,26 @@ async function fetchgetMessage() {
 	}
 	setTimeout(fetchgetMessage, 100);
 }
+
+
+function filtreTag(evt) {
+	if (evt.keyCode == 13) {
+		let tag = document.querySelector('#filtreTag').value;
+		let hashtag = document.querySelectorAll('.hashtag')
+		for (let index = 0; index < hashtag.length; index++) {
+			const element = hashtag[index];
+			const getHashtag = element.outerText;
+			if (!(tag === getHashtag)) {
+				timeline.removeChild(element.parentNode.parentNode)
+			}
+
+
+		}
+	}
+
+}
+document.querySelector('#filtreTag').addEventListener('keyup', filtreTag);
+
 
 countChar();
 setTimeout(fetchgetMessage, 0);
