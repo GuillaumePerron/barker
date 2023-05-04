@@ -12,8 +12,7 @@ let listMsg = {},
 if (hashtag === null) {
 	hashtag = "null";
 	mainPage = true;
-} else
-	document.title = "Barker | " + hashtag;
+} else document.title = "Barker | " + hashtag;
 
 document.querySelector("#logo").addEventListener("click", (_) => {
 	changeUrl();
@@ -22,7 +21,8 @@ document.querySelector("#logo").addEventListener("click", (_) => {
 function changeUrl(newHashtag) {
 	const url = new URL(window.location);
 	let nextURL = url.pathname;
-	if (newHashtag !== undefined) nextURL = `${url.pathname}?hashtag=${newHashtag.replaceAll("#", "")}`;
+	if (newHashtag !== undefined)
+		nextURL = `${url.pathname}?hashtag=${newHashtag.replaceAll("#", "")}`;
 	window.location.href = nextURL;
 }
 
@@ -102,8 +102,7 @@ function dataTraitement(div, text) {
 			finalMsg.push(`<span class="tag">${subElem}</span>`);
 		} else if (subElem[0] === "#" && subElem !== "#")
 			finalMsg.push(`<span class="hashtag" >${subElem}</span>`);
-		else
-			finalMsg.push(subElem);
+		else finalMsg.push(subElem);
 	}
 	if (!mention) softBark.play();
 	else {
@@ -180,25 +179,20 @@ async function fetchgetMessage() {
 	setTimeout(fetchgetMessage, 100);
 }
 
-
 function filtreTag(evt) {
 	if (evt.keyCode == 13) {
-		let tag = document.querySelector('#filtreTag').value;
-		let hashtag = document.querySelectorAll('.hashtag')
-		for (let index = 0; index < hashtag.length; index++) {
-			const element = hashtag[index];
-			const getHashtag = element.outerText;
-			if (!(tag === getHashtag)) {
-				timeline.removeChild(element.parentNode.parentNode)
+		let search = document.querySelector("#searchbar").value;
+		let msgList = document.querySelectorAll("#timeline > .barkDisplay");
+		for (let msg of msgList) {
+			if (msg.querySelector("span").innerText.includes(search)) {
+				msg.hidden = false;
+			} else {
+				msg.hidden = true;
 			}
-
-
 		}
 	}
-
 }
-document.querySelector('#filtreTag').addEventListener('keyup', filtreTag);
-
+document.querySelector("#searchbar").addEventListener("keyup", filtreTag);
 
 countChar();
 setTimeout(fetchgetMessage, 0);
