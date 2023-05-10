@@ -67,12 +67,14 @@ def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
                     res.append(x)
                 return res
     except:
-        pass
+        return []
 
 
 def add_message(msg):  # pylint: disable=missing-function-docstring
     try:
-        with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
+        with psycopg.connect(
+            CONN_PARAMS
+        ) as conn:  # pylint: disable=not-context-manager
             with conn.cursor() as cur:
                 cur.execute(
                     "INSERT INTO data (un_text) VALUES (%(msg)s);",
