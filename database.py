@@ -32,43 +32,56 @@ CONN_PARAMS = f"postgresql://{config['USER']}:{config['PASSWORD']}@{config['HOST
 
 
 def reset_table():  # pylint: disable=missing-function-docstring
-    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
-        with conn.cursor() as cur:
-            with open(FILENAME_DB_SHEMA, "r", encoding="utf-8") as file:
-                cur.execute(file.read())
+    try:
+        with psycopg.connect(  # pylint: disable=not-context-manager
+            CONN_PARAMS
+        ) as conn:
+            with conn.cursor() as cur:
+                with open(FILENAME_DB_SHEMA, "r", encoding="utf-8") as file:
+                    cur.execute(file.read())
+    except:
+        pass
 
 
 def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
-    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
-        with conn.cursor() as cur:
-            if main_page:
-                cur.execute(
-                    "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
-                )
-            else:
-                hashtag_format = "%{}%".format(hashtag)
-                cur.execute(
-                    """select id_data,un_text from data 
-                        where un_text LIKE %(hashtag)s
-                        AND date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP
-                        ORDER BY date_creation ASC;""",
-                    {"hashtag": hashtag_format},
-                )
-            res = []
-            for x in cur.fetchall():
-                res.append(x)
-            return res
+    try:
+        with psycopg.connect(  # pylint: disable=not-context-manager
+            CONN_PARAMS
+        ) as conn:
+            with conn.cursor() as cur:
+                if main_page:
+                    cur.execute(
+                        "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
+                    )
+                else:
+                    hashtag_format = "%{}%".format(hashtag)
+                    cur.execute(
+                        """select id_data,un_text from data 
+                            where un_text LIKE %(hashtag)s
+                            AND date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP
+                            ORDER BY date_creation ASC;""",
+                        {"hashtag": hashtag_format},
+                    )
+                res = []
+                for x in cur.fetchall():
+                    res.append(x)
+                return res
+    except:
+        pass
 
 
 def add_message(msg):  # pylint: disable=missing-function-docstring
-    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
-        with conn.cursor() as cur:
-            cur.execute(
-                "INSERT INTO data (un_text) VALUES (%(msg)s);",
-                {
-                    "msg": str(msg),
-                },
-            )
+    try:
+        with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
+            with conn.cursor() as cur:
+                cur.execute(
+                    "INSERT INTO data (un_text) VALUES (%(msg)s);",
+                    {
+                        "msg": str(msg),
+                    },
+                )
+    except:
+        pass
 
 
 if __name__ == "__main__":
