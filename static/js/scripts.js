@@ -148,16 +148,17 @@ function countChar() {
 }
 
 async function fetchgetMessage() {
-	const resp = await fetch("/msgFromServer", {
-		method: "POST",
-		body: JSON.stringify({
-			hashtag,
-			mainPage,
-		}),
-	});
-	const data = await resp.json();
-	const idData = [];
 	try {
+		const resp = await fetch("/msgFromServer", {
+			method: "POST",
+			body: JSON.stringify({
+				hashtag,
+				mainPage,
+			}),
+		});
+		const data = await resp.json();
+		const idData = [];
+
 		for (let elem of data) idData.push(elem[0]);
 		if (data === "no") {
 			listMsg = {};
