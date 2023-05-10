@@ -67,7 +67,7 @@ def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
                     res.append(x)
                 return res
     except:
-        return []
+        pass
 
 
 def add_message(msg):  # pylint: disable=missing-function-docstring
