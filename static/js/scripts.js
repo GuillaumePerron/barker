@@ -188,7 +188,7 @@ function filtreTag(evt) {
 	if (evt.keyCode == 13) {
 		let search = document.querySelector("#searchbar").value;
 		hashtag = search;
-		document.title = "Barker | " + hashtag;
+		document.title = "Barker | #" + hashtag;
 		let msgList = document.querySelectorAll("#timeline > .barkDisplay");
 		for (let msg of msgList) {
 			if (msg.querySelector("span").innerText.includes(search)) {
