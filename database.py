@@ -43,25 +43,15 @@ def reset_table():  # pylint: disable=missing-function-docstring
         pass
 
 
-def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
+def get_data():  # pylint: disable=missing-function-docstring
     try:
         with psycopg.connect(  # pylint: disable=not-context-manager
             CONN_PARAMS
         ) as conn:
             with conn.cursor() as cur:
-                if main_page:
-                    cur.execute(
-                        "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
-                    )
-                else:
-                    hashtag_format = "%{}%".format(hashtag)
-                    cur.execute(
-                        """select id_data,un_text from data 
-                            where un_text LIKE %(hashtag)s
-                            AND date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP
-                            ORDER BY date_creation ASC;""",
-                        {"hashtag": hashtag_format},
-                    )
+                cur.execute(
+                    "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
+                )
                 res = []
                 for x in cur.fetchall():
                     res.append(x)
@@ -72,9 +62,9 @@ def get_data(main_page, hashtag):  # pylint: disable=missing-function-docstring
 
 def add_message(msg):  # pylint: disable=missing-function-docstring
     try:
-        with psycopg.connect(
+        with psycopg.connect(  # pylint: disable=not-context-manager
             CONN_PARAMS
-        ) as conn:  # pylint: disable=not-context-manager
+        ) as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     "INSERT INTO data (un_text) VALUES (%(msg)s);",

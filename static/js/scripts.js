@@ -4,16 +4,10 @@ const username = document.querySelector("#username"),
 	sendButton = document.querySelector("#barkSend"),
 	counterChar = document.querySelector("#barkCounter"),
 	softBark = new Audio("static/music/soft_bark.mp3"),
-	agressiveBark = new Audio("static/music/agressive_bark.mp3"),
-	urlParams = new URLSearchParams(window.location.search);
-let listMsg = {},
-	hashtag = urlParams.get("hashtag"),
-	mainPage = false;
-if (hashtag === null) {
-	hashtag = "null";
-	mainPage = true;
-} else document.title = "Barker | " + hashtag;
+	agressiveBark = new Audio("static/music/agressive_bark.mp3");
 
+let listMsg = {},
+	hashtag = "";
 document.querySelector("#logo").addEventListener("click", (_) => {
 	changeUrl();
 });
@@ -30,6 +24,7 @@ function addMsg(elem) {
 	const div = document.createElement("div");
 	dataTraitement(div, elem[1]);
 	div.id = elem[0];
+
 	div.classList.add("barkDisplay");
 	div.querySelectorAll(".hashtag").forEach((element) => {
 		element.addEventListener("click", hashtagHandler);
@@ -96,6 +91,7 @@ function hashtagHandler(event) {
 function dataTraitement(div, text) {
 	let mention = false,
 		finalMsg = [];
+
 	for (let subElem of text.split(" ")) {
 		if (subElem[0] === "@") {
 			if (subElem.substring(1) === username.value) mention = true;
@@ -104,11 +100,7 @@ function dataTraitement(div, text) {
 			finalMsg.push(`<span class="hashtag" >${subElem}</span>`);
 		else finalMsg.push(subElem);
 	}
-	if (!mention) softBark.play();
-	else {
-		agressiveBark.play();
-		div.classList.add("mention");
-	}
+
 	const tmp = finalMsg.join(" "),
 		tmpArray = tmp.split(":"),
 		user = tmpArray[0],
@@ -120,8 +112,21 @@ function dataTraitement(div, text) {
 	userElement.addEventListener("mousedown", disableHighlightOnDoubleClick);
 	div.appendChild(userElement);
 	tmpArray[0] = "";
-	message.innerHTML += tmpArray.join(":").substring(1);
+	const messageToAdd = tmpArray.join(":").substring(1);
+	message.innerHTML += messageToAdd;
 	div.appendChild(message);
+	div.style.visibility = "visible";
+	if (!messageToAdd.includes(hashtag)) {
+		div.style.visibility = "hidden";
+		return;
+	}
+	if (!mention) {
+		softBark.play();
+		return;
+	}
+
+	agressiveBark.play();
+	div.classList.add("mention");
 }
 
 function disableHighlightOnDoubleClick(event) {
@@ -149,12 +154,9 @@ function countChar() {
 
 async function fetchgetMessage() {
 	try {
+		console.log(hashtag);
 		const resp = await fetch("/msgFromServer", {
 			method: "POST",
-			body: JSON.stringify({
-				hashtag,
-				mainPage,
-			}),
 		});
 		const data = await resp.json();
 		const idData = [];
@@ -185,12 +187,14 @@ async function fetchgetMessage() {
 function filtreTag(evt) {
 	if (evt.keyCode == 13) {
 		let search = document.querySelector("#searchbar").value;
+		hashtag = search;
+		document.title = "Barker | " + hashtag;
 		let msgList = document.querySelectorAll("#timeline > .barkDisplay");
 		for (let msg of msgList) {
 			if (msg.querySelector("span").innerText.includes(search)) {
-				msg.hidden = false;
+				msg.style.visibility = "visible";
 			} else {
-				msg.hidden = true;
+				msg.style.visibility = "hidden";
 			}
 		}
 	}

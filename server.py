@@ -17,10 +17,7 @@ def index():  # pylint: disable=missing-function-docstring
 
 @app.route("/msgFromServer", methods=["POST"])
 def send_msg():  # pylint: disable=missing-function-docstring
-    result = json.loads(request.get_data())
-    hashtag = result["hashtag"]
-    main_page = result["mainPage"]
-    msg = get_data(main_page, "#" + hashtag)
+    msg = get_data()
     return jsonify(msg)
 
 
