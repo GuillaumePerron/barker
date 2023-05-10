@@ -157,25 +157,28 @@ async function fetchgetMessage() {
 	});
 	const data = await resp.json();
 	const idData = [];
-	for (let elem of data) idData.push(elem[0]);
-	if (data === "no") {
-		listMsg = {};
-		timeline.innerHTML = "";
-		setTimeout(fetchgetMessage, 100);
-		return;
-	}
-	for (let key in listMsg) {
-		if (!idData.includes(parseInt(key))) {
-			supprMsg(key);
-			delete listMsg[key];
+	try {
+		for (let elem of data) idData.push(elem[0]);
+		if (data === "no") {
+			listMsg = {};
+			timeline.innerHTML = "";
+			setTimeout(fetchgetMessage, 100);
+			return;
 		}
-	}
-	for (let elem of data) {
-		if (listMsg[elem[0]] === undefined) {
-			listMsg[elem[0]] = elem[1];
-			addMsg(elem);
+		for (let key in listMsg) {
+			if (!idData.includes(parseInt(key))) {
+				supprMsg(key);
+				delete listMsg[key];
+			}
 		}
-	}
+		for (let elem of data) {
+			if (listMsg[elem[0]] === undefined) {
+				listMsg[elem[0]] = elem[1];
+				addMsg(elem);
+			}
+		}
+	} catch {}
+
 	setTimeout(fetchgetMessage, 300);
 }
 
