@@ -179,7 +179,7 @@ async function fetchgetMessage() {
 		}
 	} catch {}
 
-	setTimeout(fetchgetMessage, 300);
+	setTimeout(fetchgetMessage, 1000);
 }
 
 function filtreTag(evt) {
