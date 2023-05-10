@@ -176,7 +176,7 @@ async function fetchgetMessage() {
 			addMsg(elem);
 		}
 	}
-	setTimeout(fetchgetMessage, 100);
+	setTimeout(fetchgetMessage, 300);
 }
 
 function filtreTag(evt) {
