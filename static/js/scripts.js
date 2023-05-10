@@ -9,7 +9,7 @@ const username = document.querySelector("#username"),
 let listMsg = {},
 	hashtag = "";
 document.querySelector("#logo").addEventListener("click", (_) => {
-	changeUrl();
+	afficheGoodMsg();
 });
 
 function changeUrl(newHashtag) {
@@ -154,7 +154,6 @@ function countChar() {
 
 async function fetchgetMessage() {
 	try {
-		console.log(hashtag);
 		const resp = await fetch("/msgFromServer", {
 			method: "POST",
 		});
@@ -184,19 +183,30 @@ async function fetchgetMessage() {
 	setTimeout(fetchgetMessage, 1000);
 }
 
+function afficheGoodMsg(hashtagFonc) {
+	if (hashtagFonc === undefined) {
+		hashtagFonc = "";
+
+		document.title = "Barker";
+	} else {
+		document.title = "Barker | #" + hashtagFonc;
+	}
+	hashtag = "";
+	let msgList = document.querySelectorAll("#timeline > .barkDisplay");
+	for (let msg of msgList) {
+		if (msg.querySelector("span").innerText.includes(hashtagFonc)) {
+			msg.hidden = false;
+		} else {
+			msg.hidden = true;
+		}
+	}
+}
+
 function filtreTag(evt) {
 	if (evt.keyCode == 13) {
 		let search = document.querySelector("#searchbar").value;
 		hashtag = search;
-		document.title = "Barker | #" + hashtag;
-		let msgList = document.querySelectorAll("#timeline > .barkDisplay");
-		for (let msg of msgList) {
-			if (msg.querySelector("span").innerText.includes(search)) {
-				msg.hidden = false;
-			} else {
-				msg.hidden = true;
-			}
-		}
+		afficheGoodMsg(search);
 	}
 }
 document.querySelector("#searchbar").addEventListener("keyup", filtreTag);
