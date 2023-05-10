@@ -115,9 +115,9 @@ function dataTraitement(div, text) {
 	const messageToAdd = tmpArray.join(":").substring(1);
 	message.innerHTML += messageToAdd;
 	div.appendChild(message);
-	div.style.visibility = "visible";
+	div.hidden = false;
 	if (!messageToAdd.includes(hashtag)) {
-		div.style.visibility = "hidden";
+		div.hidden = true;
 		return;
 	}
 	if (!mention) {
@@ -192,9 +192,9 @@ function filtreTag(evt) {
 		let msgList = document.querySelectorAll("#timeline > .barkDisplay");
 		for (let msg of msgList) {
 			if (msg.querySelector("span").innerText.includes(search)) {
-				msg.style.visibility = "visible";
+				msg.hidden = false;
 			} else {
-				msg.style.visibility = "hidden";
+				msg.hidden = true;
 			}
 		}
 	}
