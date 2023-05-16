@@ -22,12 +22,33 @@
         margin-left: 10vw;
     }
 
+    #pseudoSvg{
+        width: 8%;
+    }
     #username {
-        width: 70%;
+        transform: translate(0, -50%);
+        width: 80%;
+        margin-left: 7%;
+        
+    }
+    #logo{
+        width: 30%;
+        height: auto;
+    }
+    #searchbar{
+        transform: translate(0, -25%);
+        margin-left: 5%;
+        width: 60%;
+    }
+    header{
+        height:10%;
     }
 
     .barkDisplay:last-child {
         margin-bottom: 250px;
+    }
+    .barkDisplay:first-child {
+        margin-top: 35%;
     }
 }
 
@@ -43,6 +64,9 @@
     svg {
         height: 40px;
     }
+    #pseudoSvg{
+        width: 5%;
+    }
 
     .barkWriteArea {
         left: 30%;
@@ -57,4 +81,32 @@
     .barkDisplay:last-child {
         margin-bottom: 100px;
     }
+    .barkDisplay:first-child {
+        margin-top: 70px;
+    }
+    #pseudoSvg{
+        height: auto;
+        transform: translate(0, -25%);
+        width: 1.5%;
+        margin-left: 20%;
+
+    }
+    #username {
+        transform: translate(0, -50%);
+        width: 13.5%;
+        margin: 0px;
+    }
+    #logo{
+        height: auto;
+        width: 10%;
+    }
+    #searchbar{
+        transform: translate(0, -50%);
+        margin-left: 30%;
+        width: 20%;
+    }
+    header{
+        height: 50px;
+    }
+
 }

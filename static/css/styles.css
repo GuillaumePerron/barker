@@ -23,10 +23,13 @@ body, #timeline, #barkWrite, #username {
     justify-content: center;
     margin: auto;
 }
+input{
+    background-color: #131516;
+    border: 5px solid #FFFF13;
 
+}
 #barkWrite {
     background-color: #131516;
-    border: 10px solid #FFFF13;
     height: 4vh;
     margin-top: 2vh;
     overflow: auto;
@@ -62,7 +65,6 @@ body, #timeline, #barkWrite, #username {
 #username {
     background-color: #131516;
     border: solid #FFFF13 5px;
-    margin-left: 10px;
 }
 
 #barkSend, #logo, .hashtag {
@@ -86,22 +88,12 @@ input:focus, textarea:focus {
 }
 
 header {
-    align-items: center;
-    display: flex;
-    height: 80px;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-header img {
+    background-color: #303030;
+    width: 100%;
     height: 50px;
+    position: fixed;
+    top:0px;
+    padding-bottom: 20px;
 }
 
-header div {
-    align-items: center;
-    display: flex;
-}
 
-header div p {
-    margin-right: 16px;
-}
