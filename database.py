@@ -49,8 +49,9 @@ def get_data():  # pylint: disable=missing-function-docstring
             CONN_PARAMS
         ) as conn:
             with conn.cursor() as cur:
+                # "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"""
                 cur.execute(
-                    "select id_data,un_text from data where date_creation + (interval '1 minute') >= CURRENT_TIMESTAMP ORDER BY date_creation ASC;"
+                    "select id_data,un_text from data ORDER BY date_creation ASC;"
                 )
                 res = []
                 for x in cur.fetchall():
